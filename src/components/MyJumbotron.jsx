@@ -42,7 +42,7 @@ class MyJumbotron extends React.Component {
 	fetchAddProfilePic = async (e) => {
 		console.log("doing the fetch post")
 		let formData = new FormData()
-		formData.append("profile", e.target.files[0])
+		formData.append("image", e.target.files[0])
 		let parsedResponse = await addProfilePic(formData, this.state.myObject._id)
 		console.log(parsedResponse)
 		this.fetchMe(this.props.id)

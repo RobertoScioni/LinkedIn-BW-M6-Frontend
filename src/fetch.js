@@ -23,7 +23,7 @@ const addProfilePic = async (profile, userId) => {
 	let TOKEN = process.env.REACT_APP_TOKEN
 	try {
 		let response = await fetch(
-			`${process.env.REACT_APP_URL}profile/${userId}/picture`,
+			`${process.env.REACT_APP_URL}profile/upload/${userId}`,
 			{
 				headers: new Headers({
 					Authorization: `Bearer ${TOKEN}`,
