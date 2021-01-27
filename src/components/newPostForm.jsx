@@ -21,7 +21,7 @@ class NewPostForm extends React.Component {
 		console.log("/****image uploader handler function****")
 		console.log("target", ev.target)
 		const data = new FormData()
-		data.append("post", ev.target.files[0])
+		data.append("image", ev.target.files[0])
 		this.setState({ data, post: this.postImg })
 	}
 
@@ -53,7 +53,7 @@ class NewPostForm extends React.Component {
 	postImg = async () => {
 		try {
 			let id = await this.postTxt()
-			let url = `${process.env.REACT_APP_URL}posts/${id}`
+			let url = `${process.env.REACT_APP_URL}posts/${this.state.id}`
 			console.log("posimg url", url)
 			let response = await fetch(url, {
 				method: "POST",
