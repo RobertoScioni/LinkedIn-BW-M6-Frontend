@@ -14,7 +14,7 @@ class LeftSideBarNewsPage extends React.Component {
 	fetchMe = async () => {
 		/*try {
 			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/me`,
+				`${process.env.REACT_APP_URL}profile/me`,
 				{
 					method: "GET",
 					headers: new Headers({
@@ -31,7 +31,7 @@ class LeftSideBarNewsPage extends React.Component {
 		}*/
 	}
 	componentDidMount = () => {
-		console.log()
+		console.log("mounted left sidebar of the newsfeed")
 		this.fetchMe()
 	}
 
@@ -55,7 +55,9 @@ class LeftSideBarNewsPage extends React.Component {
 						/>
 					</Row>
 					<Row className="userNameRow text-center">
-						<Col>{this.state.myObject.name + " " +this.state.myObject.surname}</Col>
+						<Col>
+							{this.state.myObject.name + " " + this.state.myObject.surname}
+						</Col>
 					</Row>
 					<Row className="bioRow">
 						<Col>{this.state.myObject.bio}</Col>
@@ -73,7 +75,7 @@ class LeftSideBarNewsPage extends React.Component {
 					<Row className="access">Acces exclusive tools {"&"} insights </Row>
 					<Row className="premiumRow">
 						<Col sm={2} xs={2}>
-							<RiVipDiamondFill className="premiumIcon "  />
+							<RiVipDiamondFill className="premiumIcon " />
 						</Col>
 						<Col sm={10} xs={10} className="premiumText">
 							Reactivate Premium
@@ -93,31 +95,27 @@ class LeftSideBarNewsPage extends React.Component {
 
 				<Container className="secondContainer ">
 					<Row className="groups ">
-						<a href="/" >Groups</a>
+						<a href="/">Groups</a>
 					</Row>
 					<Row className="events">
 						<Col sm={8} xs={6}>
-							<a href="/" className="font12 text-muted ">Events</a>
+							<a href="/" className="font12 text-muted ">
+								Events
+							</a>
 						</Col>
 						<Col sm={4} xs={6}>
 							<AiOutlinePlus className="plus" />
 						</Col>
 					</Row>
 					<Row className="hashTag">
-					<Col sm={8} xs={6}>
-						<a href="/" className="hashTagText" className= "text-muted font12">
-							Followed Hashtag
-						</a>
+						<Col sm={8} xs={6}>
+							<a href="/" className="hashTagText" className="text-muted font12">
+								Followed Hashtag
+							</a>
 						</Col>
 					</Row>
 					<div className="discoverMe">
-						<p
-						
-							className="discoverText font14"
-						>
-							
-							Discover Me
-						</p>
+						<p className="discoverText font14">Discover Me</p>
 					</div>
 				</Container>
 			</>

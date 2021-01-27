@@ -14,7 +14,7 @@ class MyJumbotron extends React.Component {
 			console.log(this.props.tracksUrl)
 			let TOKEN = process.env.REACT_APP_TOKEN
 			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/profile/${id ? id : "me"}`,
+				`${process.env.REACT_APP_URL}profile/${id ? id : "me"}`,
 				{
 					method: "GET",
 					headers: new Headers({

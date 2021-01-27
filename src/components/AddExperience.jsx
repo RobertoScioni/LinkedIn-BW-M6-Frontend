@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Modal, Button, Form, Col, Image,Spinner } from "react-bootstrap"
+import { Modal, Button, Form, Col, Image, Spinner } from "react-bootstrap"
 import { me } from "../fetch"
 
 class AddExperience extends React.Component {
@@ -23,7 +23,6 @@ class AddExperience extends React.Component {
 		exp: {},
 		errMessage: "",
 		loading: false,
-	
 	}
 	// myId = async () => {
 	// 	let id = await me()
@@ -56,7 +55,7 @@ class AddExperience extends React.Component {
 
 		try {
 			if (this.props.exId) {
-				const url = `https://striveschool-api.herokuapp.com/api/profile/${this.props.uid}/experiences/`
+				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
 				response = await fetch(url + this.props.exId, {
 					method: "PUT",
 					body: JSON.stringify(this.state.experience),
@@ -68,7 +67,7 @@ class AddExperience extends React.Component {
 				})
 			} else {
 				response = await fetch(
-					`https://striveschool-api.herokuapp.com/api/profile/${this.props.uid}/experiences`,
+					`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences`,
 					{
 						method: "POST",
 						body: JSON.stringify(this.state.experience),
@@ -76,16 +75,15 @@ class AddExperience extends React.Component {
 							"Content-Type": "application/json",
 
 							Authorization: `Bearer ${TOKEN}`,
-
 						}),
 					}
 				)
 			}
-
+			console.log("RESPONSE", response)
 			if (response.ok) {
-				let res= await response.json()
-				console.log("res of post",res)
-				
+				let res = await response.json()
+				console.log("res of post", res)
+
 				this.setState({
 					experience: {
 						role: "",
@@ -96,7 +94,6 @@ class AddExperience extends React.Component {
 						description: "",
 					},
 					errMessage: "",
-					
 				})
 				//this.handleClose()
 				return res
@@ -106,7 +103,6 @@ class AddExperience extends React.Component {
 				this.setState({
 					errMessage: error.message,
 					loading: false,
-					
 				})
 			}
 		} catch (e) {
@@ -118,18 +114,15 @@ class AddExperience extends React.Component {
 		}
 	}
 
-	
-
 	getFetch = async () => {
 		let TOKEN = process.env.REACT_APP_TOKEN
 
 		try {
-			//https://striveschool-api.herokuapp.com/api/profile//experiences
-			const url = `https://striveschool-api.herokuapp.com/api/profile/${this.props.uid}/experiences/`
+			//${process.env.REACT_APP_URL}profile//experiences
+			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
 			let response = await fetch(url + this.props.exId, {
 				method: "GET",
 				headers: {
-
 					Authorization: `Bearer ${TOKEN}`,
 				},
 			})
@@ -157,13 +150,11 @@ class AddExperience extends React.Component {
 		let TOKEN = process.env.REACT_APP_TOKEN
 		this.setState({ loading: true })
 		try {
-			const url = `https://striveschool-api.herokuapp.com/api/profile/${this.props.uid}/experiences/`
+			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
 			let response = await fetch(url + this.props.exId, {
 				method: "DELETE",
 				headers: {
-
 					Authorization: `Bearer ${TOKEN}`,
-
 				},
 			})
 			if (response.ok) {
@@ -189,40 +180,47 @@ class AddExperience extends React.Component {
 
 	UploadImageFetch = async (id) => {
 		let TOKEN = process.env.REACT_APP_TOKEN
-	try{
-	let response = await fetch(
-	`https://striveschool-api.herokuapp.com/api/profile/${this.props.uid}/experiences/` +
-	id+
-		"/picture",
-	{
-		method: "POST",
-		body: this.state.formData,
-		headers: new Headers({
-			// "Content-Type": "application/json",
-			Authorization: `Bearer ${TOKEN}`,
-		}),
-	}
-)
+		console.log("token", TOKEN)
+		console.log(
+			"url",
+			`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
+		)
+		try {
+			let response = await fetch(
+				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/` +
+					id +
+					"/picture",
+				{
+					method: "POST",
+					body: this.state.formData,
+					headers: new Headers({
+						// "Content-Type": "application/json",
+						Authorization: `Bearer ${TOKEN}`,
+					}),
+				}
+			)
 
-if (response.ok){
-	let result=response.json()
-	alert("Experience saved!")
-	this.setState({loading:false})
-	console.log(result)
-	this.handleClose() }
-}
-catch(e){console.log(e)}
-		
-	
-			
+			if (response.ok) {
+				let result = response.json()
+				alert("Experience saved!")
+				this.setState({ loading: false })
+				console.log(result)
+				this.handleClose()
+			}
+		} catch (e) {
+			console.log(e)
+		}
 	}
 	submitForm = (e) => {
 		e.preventDefault()
 		this.setState({ loading: true })
 		this.postExp()
-		
 	}
-	postExp=async()=>{ let expId = await this.EditFetch();this.UploadImageFetch(expId._id)}
+	postExp = async () => {
+		let expId = await this.EditFetch()
+		console.log("expId", expId)
+		this.UploadImageFetch(expId._id)
+	}
 
 	componentDidMount = async () => {
 		console.log(this.props.exId)
@@ -340,7 +338,6 @@ catch(e){console.log(e)}
 										id="startDate"
 										placeholder="start date"
 										value={this.state.experience.startDate}
-										
 										onChange={this.updateField}
 										required
 									></Form.Control>
@@ -405,7 +402,10 @@ catch(e){console.log(e)}
 										className=" deleteBtn"
 										variant="primary"
 										onClick={this.handleDelete}
-									>{this.state.loading && <Spinner animation="border" variant="warning" />}
+									>
+										{this.state.loading && (
+											<Spinner animation="border" variant="warning" />
+										)}
 										Delete
 									</Button>
 								)}
@@ -413,8 +413,11 @@ catch(e){console.log(e)}
 									className="saveBtn ml-auto"
 									variant="primary"
 									type="submit"
-								> {this.state.loading && <Spinner animation="border" variant="warning" />}
+								>
 									{" "}
+									{this.state.loading && (
+										<Spinner animation="border" variant="warning" />
+									)}{" "}
 									Save
 								</Button>
 							</Form.Group>

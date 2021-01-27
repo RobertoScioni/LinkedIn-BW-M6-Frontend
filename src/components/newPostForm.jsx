@@ -28,7 +28,7 @@ class NewPostForm extends React.Component {
 	postTxt = async () => {
 		try {
 			let response = await fetch(
-				`https://striveschool-api.herokuapp.com/api/posts/${this.state.id}`,
+				`${process.env.REACT_APP_URL}posts/${this.state.id}`,
 				{
 					method: this.state.method,
 					headers: new Headers({
@@ -53,7 +53,7 @@ class NewPostForm extends React.Component {
 	postImg = async () => {
 		try {
 			let id = await this.postTxt()
-			let url = `https://striveschool-api.herokuapp.com/api/posts/${id}`
+			let url = `${process.env.REACT_APP_URL}posts/${id}`
 			console.log("posimg url", url)
 			let response = await fetch(url, {
 				method: "POST",

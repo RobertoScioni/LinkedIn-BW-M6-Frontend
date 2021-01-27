@@ -24,16 +24,13 @@ class NewsFeedPost extends React.Component {
 		)
 		try {
 			let TOKEN = process.env.REACT_APP_TOKEN
-			let response = await fetch(
-				"https://striveschool-api.herokuapp.com/api/posts/" + id,
-				{
-					method: "DELETE",
-					headers: new Headers({
-						Authorization: `Bearer ${TOKEN}`,
-						"Content-Type": "application/json",
-					}),
-				}
-			)
+			let response = await fetch(`${process.env.REACT_APP_URL}posts/` + id, {
+				method: "DELETE",
+				headers: new Headers({
+					Authorization: `Bearer ${TOKEN}`,
+					"Content-Type": "application/json",
+				}),
+			})
 			console.log("the server responded", response)
 			this.props.refresh()
 		} catch (err) {
@@ -98,7 +95,9 @@ class NewsFeedPost extends React.Component {
 								ago
 							</span>
 						)}
-						<span className="mx-1 font12 text-muted ">created at {formatISO9075(created)}</span>
+						<span className="mx-1 font12 text-muted ">
+							created at {formatISO9075(created)}
+						</span>
 					</Container>
 				</Card.Body>
 			</Card>

@@ -37,16 +37,13 @@ class NewsFeedBody extends React.Component {
 	get = async () => {
 		try {
 			let TOKEN = process.env.REACT_APP_TOKEN
-			let response = await fetch(
-				"https://striveschool-api.herokuapp.com/api/posts/",
-				{
-					method: "GET",
-					headers: new Headers({
-						Authorization: `Bearer ${TOKEN}`,
-						"Content-Type": "application/json",
-					}),
-				}
-			)
+			let response = await fetch(`${process.env.REACT_APP_URL}posts/`, {
+				method: "GET",
+				headers: new Headers({
+					Authorization: `Bearer ${TOKEN}`,
+					"Content-Type": "application/json",
+				}),
+			})
 			response = await response.json()
 			console.log("got posts", typeof response)
 			let start = (this.props.p - 1) * this.state.pp

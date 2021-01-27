@@ -32,12 +32,11 @@ class OurNavBar extends React.Component {
 		}
 		if (query) {
 			try {
-				const url = "https://striveschool-api.herokuapp.com/api/profile"
+				const url = `${process.env.REACT_APP_URL}profile`
 				let response = await fetch(url, {
 					method: "GET",
 					headers: {
-						Authorization:
-							"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmM0YzQ1OWVkMjY2ODAwMTcwZWEzZDciLCJpYXQiOjE2MDY3MzA4NjAsImV4cCI6MTYwNzk0MDQ2MH0.tP9w6YZ0yOqToeO2kXHHks7NXSo36rv-sFXVj8L7n8Q",
+						Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
 					},
 				})
 				let users = await response.json()
