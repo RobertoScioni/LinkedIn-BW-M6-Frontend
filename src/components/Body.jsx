@@ -28,7 +28,7 @@ class Body extends React.Component {
 		//old url ${process.env.REACT_APP_URL}profile/5fc4c459ed266800170ea3d7/experiences
 		const url = `${process.env.REACT_APP_URL}profile/${
 			this.props.id === "me" ? this.state.id : this.props.id
-		}/experiences`
+		}/experience`
 		let response = await fetch(url, {
 			method: "GET",
 			headers: {

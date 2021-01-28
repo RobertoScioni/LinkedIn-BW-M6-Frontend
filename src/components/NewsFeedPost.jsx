@@ -41,7 +41,7 @@ class NewsFeedPost extends React.Component {
 
 	componentDidMount = async () => {
 		//this.getImgs()
-		console.log("got an image?", this.state.image)
+		console.log("got an image?", this.state.imageUrl)
 	}
 	render() {
 		let created = new Date(this.state.createdAt)
@@ -64,7 +64,13 @@ class NewsFeedPost extends React.Component {
 						<span className="flex-fill d-inline-block myWrap">
 							{this.state.text}
 
-							{this.state.image && <Image src={this.state.image} thumbnail />}
+							{this.state.imageUrl && (
+								<Image
+									className="border-0"
+									src={this.state.imageUrl}
+									thumbnail
+								/>
+							)}
 						</span>
 						{this.state.mine && (
 							<>
