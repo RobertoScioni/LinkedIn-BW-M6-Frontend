@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom"
 class Sidebar extends React.Component {
 	state = {
 		users: [],
-		show: "6",
+		show: "3",
 	}
 
 	fetch = async (team) => {
@@ -52,12 +52,12 @@ class Sidebar extends React.Component {
 				<Button
 					className="btn-sidebar"
 					onClick={() =>
-						this.state.show === "6"
-							? this.setState({ show: "12" })
-							: this.setState({ show: "6" })
+						this.state.show === "3"
+							? this.setState({ show: "6" })
+							: this.setState({ show: "3" })
 					}
 				>
-					{this.state.show === "6" ? <p>Show More</p> : <p>Show Less</p>}{" "}
+					{this.state.show === "3" ? <p>Show More</p> : <p>Show Less</p>}{" "}
 				</Button>
 			</div>
 		)

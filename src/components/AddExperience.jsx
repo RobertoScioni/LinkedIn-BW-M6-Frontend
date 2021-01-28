@@ -55,6 +55,7 @@ class AddExperience extends React.Component {
 
 		try {
 			if (this.props.exId) {
+				console.log("exId:",this.props.exId)
 				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 				response = await fetch(url + this.props.exId, {
 					method: "PUT",
