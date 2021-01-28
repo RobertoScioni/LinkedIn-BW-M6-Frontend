@@ -54,10 +54,11 @@
 }
 
 .btn-sidebar {
+	margin-top: 10px;
 	width: 100%;
 	background-color: transparent;
 	border: none;
-	padding: 15px;
+	padding: 4px;
 	color: #1066c2;
 	font-weight: bold;
 }
