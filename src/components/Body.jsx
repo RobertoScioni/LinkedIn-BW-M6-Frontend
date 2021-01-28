@@ -2,10 +2,11 @@ import React from "react"
 import Experience from "./Experience.jsx"
 import { AiOutlinePlus } from "react-icons/ai"
 import AddExperience from "./AddExperience.jsx"
-import { Image } from "react-bootstrap"
+import { Image,Dropdown,DropdownButton } from "react-bootstrap"
 import { GoPencil } from "react-icons/go"
 import {CgExport} from  "react-icons/cg"
 import { me } from "../fetch"
+import { CSVLink, CSVDownload } from "react-csv";
 
 //HERE IS PROFILE BODY
 
@@ -19,7 +20,12 @@ class Body extends React.Component {
 
 		id: false,
 		isEditable: false,
+		csv:[["firstname", "lastname", "email"],
+		["Ahmed", "Tomi", "ah@smthing.co.com"],
+		["Raed", "Labes", "rl@smthing.co.com"],
+		["Yezzi", "Min l3b", "ymin@cocococo.com"]]
 	}
+
 
 	//THis fetch for showing experiences based on id/Id is coming from clicking
 	fetch = async () => {
@@ -91,7 +97,7 @@ class Body extends React.Component {
 	}
 	getCSV=async ()=>{ 
 		try {
-			let TOKEN = process.env.REACT_APP_TOKEN
+		let TOKEN = process.env.REACT_APP_TOKEN
 	
 		const url = `${process.env.REACT_APP_URL}profile/${
 			this.props.id === "me" ? this.state.id : this.props.id
@@ -104,8 +110,16 @@ class Body extends React.Component {
 		})
 	
 		if (response.ok) {
-		let csv= await response.json}
-		else{ console.log("there is an error")}
+		let csv= await response.text()
+		console.log(csv)
+		this.setState({csv:csv})
+		console.log("done")
+	
+		}
+	
+		else
+		{ console.log("there is an error")
+	    }
 			
 		} catch (error) {
 			console.log(error)
@@ -132,13 +146,18 @@ class Body extends React.Component {
 					<div className="d-flex content">
 						<h4 className="mb-3 d-inline ">{this.props.title}</h4>
 						{this.props.id === "me" && (
+
+							
 							<div className= "d-flex ml-auto">
-							<CgExport className="icons0 "
-								onClick={this.getCSV}/>
-							<AiOutlinePlus
+								 
+								<DropdownButton variant="Secondary"
+								title="More..."
+								onClick={this.getCSV}>
+								<Dropdown.Item as="button" ><CSVLink data={this.state.csv}>Download your experience as CSV</CSVLink></Dropdown.Item>
+								</DropdownButton>
+									<AiOutlinePlus
 								className="icons0 ml-auto"
-								onClick={this.handleShow}
-							/>
+								onClick={this.handleShow}/>
 							</div>
 							
 							
