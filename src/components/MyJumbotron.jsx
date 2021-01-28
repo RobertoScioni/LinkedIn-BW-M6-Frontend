@@ -89,7 +89,7 @@ class MyJumbotron extends React.Component {
               />
             </Row>
             <Row className="d-flex align-items-center">
-              <Col sm={6} xl={3}>
+              <Col>
                 <Image
                   className="profilePhoto "
                   src={this.state.myObject.image}
@@ -106,13 +106,13 @@ class MyJumbotron extends React.Component {
                   onChange={(event) => this.fetchAddProfilePic(event)}
                 />
               </Col>
-              <Col sm={3} xl={2} className="colBtn first ">
+              <Col className="offset-lg-3">
                 <Dropdown className="Jumbodrop">
                   <Dropdown.Toggle
                     className="addProfileSection rounded-pill"
                     id="dropdown-basic"
                   >
-                    Open to
+                     Add profile section
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item className="dropDownItem" href="#/action-1">
@@ -122,19 +122,7 @@ class MyJumbotron extends React.Component {
                     <Dropdown.Item className="dropDownItem" href="#/action-2">
                       Hiring
                     </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Col>
-              <Col xl={3} className="colBtn second d-none  d-xl-block ">
-                <Dropdown className="Jumbodrop">
-                  <Dropdown.Toggle
-                    className="addProfileSection second rounded-pill"
-                    id="dropdown-basic"
-                  >
-                    Add profile section
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item className="dropDownItem" href="#/action-1">
+					<Dropdown.Item className="dropDownItem" href="#/action-1">
                       Intro
                     </Dropdown.Item>
                     <hr />
@@ -164,7 +152,7 @@ class MyJumbotron extends React.Component {
                   </Dropdown.Menu>
                 </Dropdown>
               </Col>
-              <Col sm={2} xl={2} className="colBtn third">
+              <Col sm={2} lg={2}>
 				<PDFDropdown
 				id={this.state.myObject._id} />
               </Col>
