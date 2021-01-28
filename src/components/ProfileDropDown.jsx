@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event"
 import React, { useState } from "react"
-
+import Avatar from '@material-ui/core/Avatar';
 import {
 	FormControl,
 	Card,
@@ -45,12 +45,8 @@ const ProfileMenu = React.forwardRef(
 					<Card.Body className="p-1">
 						<Container fluid>
 							<Row>
-								<Col className="p-0 m-0">
-									<Image
-										src={user.image}
-										roundedCircle
-										className="mediumProfilePic"
-									/>
+								<Col className="p-0 m-2">
+									<Avatar alt={user.name || user.surname} src={user.image} />
 								</Col>
 								<Col className="pl-1 m-0">
 									<p className="p-0 m-0">{user.name}</p>

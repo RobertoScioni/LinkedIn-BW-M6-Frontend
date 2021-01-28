@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
 	render() {
 		return (
 			<div className="cardsin pt-3 px-3 pb-0 ">
-				<h4 className="mb-3">{this.props.title}</h4>
+				<strong><p className="mb-3" style={{fontSize: "16px" }}>{this.props.title}</p></strong>
 				{this.state.users.slice(0, this.state.show).map((user) => (
 					<User
 						key={user.id}
