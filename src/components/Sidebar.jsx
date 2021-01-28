@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
 				users = users.filter(
 					(user) =>
 						user.name === "Hilal" ||
-						user.name === "Evgeni" ||
+						user.name === "mirela" ||
 						user.name === "Roberto"
 				)
 			}
