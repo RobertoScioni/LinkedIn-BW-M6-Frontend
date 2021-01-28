@@ -20,10 +20,7 @@ class Body extends React.Component {
 
 		id: false,
 		isEditable: false,
-		csv:[["firstname", "lastname", "email"],
-		["Ahmed", "Tomi", "ah@smthing.co.com"],
-		["Raed", "Labes", "rl@smthing.co.com"],
-		["Yezzi", "Min l3b", "ymin@cocococo.com"]]
+		csv:""
 	}
 
 
