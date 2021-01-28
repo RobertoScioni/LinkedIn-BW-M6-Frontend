@@ -28,7 +28,7 @@ class NewPostForm extends React.Component {
 	postTxt = async () => {
 		try {
 			let response = await fetch(
-				`${process.env.REACT_APP_URL}posts/${this.state.id}`,
+				`${process.env.REACT_APP_URL}posts/${this.state.id && this.state.id}`,
 				{
 					method: this.state.method,
 					headers: new Headers({
@@ -38,9 +38,10 @@ class NewPostForm extends React.Component {
 					body: JSON.stringify(this.state.message),
 				}
 			)
-			response = await response.json()
+			response = await response.text()
+			console.log("new post id from inside the tx creation method", response)
 			if (this.state.data !== null) {
-				return response._id
+				return response
 			} else {
 				console.log("nopic")
 				this.props.refresh()
@@ -53,7 +54,8 @@ class NewPostForm extends React.Component {
 	postImg = async () => {
 		try {
 			let id = await this.postTxt()
-			let url = `${process.env.REACT_APP_URL}posts/${this.state.id}`
+			console.log("new msg id", id)
+			let url = `${process.env.REACT_APP_URL}posts/${id}`
 			console.log("posimg url", url)
 			let response = await fetch(url, {
 				method: "POST",
