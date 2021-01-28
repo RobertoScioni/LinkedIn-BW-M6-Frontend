@@ -231,6 +231,7 @@ hr {
 		font-size: 15px;
 	}
 	.profilePic {
+		object-fit: cover !important;
 		width: 100px;
 		height: 100px;
 		margin-bottom: -20%;

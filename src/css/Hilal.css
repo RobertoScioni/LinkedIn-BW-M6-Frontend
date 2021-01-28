@@ -23,6 +23,7 @@
 	background-color: #0a66c2 !important;
 }
 .userpic {
+	object-fit: cover !important;
 	width: 40px;
 	max-height: 40px;
 	max-width: 40px;
