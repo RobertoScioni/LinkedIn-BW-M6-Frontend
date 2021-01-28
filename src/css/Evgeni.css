@@ -30,12 +30,13 @@
 }
 .profilePhoto {
 	width: 150px;
-	/* height: 150px; */
+	height: 150px;
 	min-height:90px;
 	min-width:90px;
 	margin-left: 10px;
 	margin-top: -55px;
 	border: 1px white solid;
+	object-fit: cover !important;
 }
 .coverPhoto {
 	border-radius: 15px 15px 0px 0px;

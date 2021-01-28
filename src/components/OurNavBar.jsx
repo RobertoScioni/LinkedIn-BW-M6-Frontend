@@ -10,8 +10,10 @@ import {
 	Container,
 	ListGroup,
 } from "react-bootstrap"
-
+import {Avatar, Badge} from '@material-ui/core';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import { me } from "../fetch"
+import "../css/Hilal.css"
 
 class OurNavBar extends React.Component {
 	constructor(props) {
@@ -156,14 +158,9 @@ class OurNavBar extends React.Component {
 								<p className="m-0">My Network</p>
 							</Nav.Link>
 							<Nav.Link href="#jobs">
-								<svg
-									id="global-nav-icon--mercado__jobs"
-									className="global-nav__icon"
-									height="24"
-									width="24"
-								>
-									<path d="m17 6v-1c0-1.7-1.3-3-3-3h-4c-1.7 0-3 1.3-3 3v1h-5v4c0 1.7 1.3 3 3 3h14c1.7 0 3-1.3 3-3v-4zm-8-1c0-.6.4-1 1-1h4c.6 0 1 .4 1 1v1h-6zm10 9c1.2 0 2.3-.5 3-1.4v4.4c0 1.7-1.3 3-3 3h-14c-1.7 0-3-1.3-3-3v-4.4c.7.9 1.8 1.4 3 1.4z"></path>
-								</svg>
+							<Badge badgeContent={4} color="primary">
+  								<BusinessCenterIcon />
+							</Badge>
 								<p className="m-0">Jobs</p>
 							</Nav.Link>
 							<Nav.Link href="#messaging">
@@ -190,14 +187,7 @@ class OurNavBar extends React.Component {
 							</Nav.Link>
 							<Dropdown className="me px-3">
 								<Dropdown.Toggle as={ProfileToggle} id="Profile-menu">
-									<Image
-										src={
-											this.state.profile &&
-											this.state.profile.image /*"http://placehold.it/24x24"*/
-										}
-										roundedCircle
-										className="miniProfilePic mx-auto"
-									/>
+								<Avatar alt={this.state.profile.name || this.state.profile.surname} src={this.state.profile.image} className="navbarProfile mt-1" />
 									<p className="m-0">Me &#x25bc;</p>
 								</Dropdown.Toggle>
 								<Dropdown.Menu
