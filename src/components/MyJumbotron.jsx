@@ -83,8 +83,8 @@ class MyJumbotron extends React.Component {
           <div>
             <Row>
               <Image
-                className="coverPhoto"
-                src="https://media-exp1.licdn.com/dms/image/C4D1BAQG9vhg4DWuuQQ/company-background_10000/0?e=2159024400&v=beta&t=SlC6mg8ivHsibl-N6L6NH7ZK6-zbkF0ujNtrJVWSQAQ"
+                className="profileCover"
+                src="https://www.zipjob.com/blog/wp-content/uploads/2020/08/linkedin-default-background-cover-photo-1.png"
                 fluid
               />
             </Row>
@@ -112,7 +112,7 @@ class MyJumbotron extends React.Component {
                     className="addProfileSection rounded-pill"
                     id="dropdown-basic"
                   >
-                     Add profile section
+                    <strong>Add profile section</strong> 
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item className="dropDownItem" href="#/action-1">

@@ -42,6 +42,12 @@
 .Jumbodrop {
 	height: fit-content;
 }
+.Jumbodrop .addProfileSection{
+	background-color:  #0A66C2 !important;
+}
+.Jumbodrop .addProfileSection:hover{
+	background-color:  #004182 !important;
+}
 
 .mediumProfilePic {
 	width: 50px;

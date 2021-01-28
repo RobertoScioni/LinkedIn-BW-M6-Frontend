@@ -62,6 +62,22 @@
 	color: #1066c2;
 	font-weight: bold;
 }
+.morebtn button{
+	color: #3D3D3D !important;
+	border: #3D3D3D solid 1px !important;
+	border-radius: 50px;
+}
+.morebtn .dropdown-menu{
+	margin: -2px;
+	padding: 1px;
+	inset: 5px auto auto 0px !important;
+}
+.morebtn .dropdown-menu a{
+	padding: 0.25rem 2.8rem !important;
+}
+.morebtn .dropdown-menu a:hover{
+	color: #0A66C2!important;
+}
 .btn-sidebar:hover {
 	background-color: #dce7f1;
 	color: #1066c2;

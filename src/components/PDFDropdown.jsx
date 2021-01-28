@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {DropdownButton,  Dropdown} from "react-bootstrap";
-
+import "../css/Hilal.css"
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 export default class PDFDropdown extends Component {
     state = {
         PDF:null,
@@ -26,10 +27,10 @@ export default class PDFDropdown extends Component {
     render() {
         return (
             <div>
-                <DropdownButton variant="Secondary"
+                <DropdownButton variant="Secondary" className="morebtn"
                   title="More..."
                 >
-                  <Dropdown.Item as="button" onClick={this.fetchPDF}>Download your resume as PDF</Dropdown.Item>
+                  <Dropdown.Item onClick={this.fetchPDF}><SystemUpdateAltIcon /> Save to PDF</Dropdown.Item>
                 </DropdownButton>
             </div>
         )

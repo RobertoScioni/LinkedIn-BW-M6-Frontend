@@ -92,7 +92,7 @@
 /* second container */
 .secondContainer {
 	margin-top: 10px;
-	height: 195px;
+	height: 170px;
 
 	border: 1px lightgrey solid;
 	border-radius: 17px;
@@ -106,30 +106,38 @@
 	font-weight: 500;
 }
 .events {
-	margin-left: -7px;
-	margin-top: 15px;
+	font-color: #0a66c2 !important;
+	margin-left: -15px;
+	margin-top: 8px;
 	font-size: 19px;
 	font-weight: 500;
 }
 .hashTag {
-	margin-top: 15px;
+	margin-top: 8px;
 	font-size: 19px;
 	font-weight: 500;
 	border-bottom: 1px lightgrey solid;
 	padding-bottom: 8px;
+}
+.hashTag a{
+	color: #0a66c2 !important;
+}
+.events a {
+	color: #0a66c2 !important;
 }
 .hashTagText {
 	margin-left: 22px;
 }
 .plus {
 	margin-left: 27px;
-	font-size: 25px;
+	font-size: 20px;
 }
 .discoverMe {
 	margin-top: 15px;
 	font-weight: 500;
 	font-size: 20px;
 	margin-left: 5px;
+	text-align: center;
 }
 
 /*

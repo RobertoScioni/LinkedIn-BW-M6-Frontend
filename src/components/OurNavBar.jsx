@@ -158,7 +158,7 @@ class OurNavBar extends React.Component {
 								<p className="m-0">My Network</p>
 							</Nav.Link>
 							<Nav.Link href="#jobs">
-							<Badge badgeContent={4} color="primary">
+							<Badge badgeContent={4} color="error">
   								<BusinessCenterIcon />
 							</Badge>
 								<p className="m-0">Jobs</p>
@@ -188,7 +188,7 @@ class OurNavBar extends React.Component {
 							<Dropdown className="me px-3">
 								<Dropdown.Toggle as={ProfileToggle} id="Profile-menu">
 								<Avatar alt={this.state.profile.name || this.state.profile.surname} src={this.state.profile.image} className="navbarProfile mt-1" />
-									<p className="m-0">Me &#x25bc;</p>
+									<p className="m-0">Me</p>
 								</Dropdown.Toggle>
 								<Dropdown.Menu
 									as={ProfileMenu}
