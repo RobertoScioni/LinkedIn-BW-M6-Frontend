@@ -2,7 +2,7 @@ import React from "react"
 import Experience from "./Experience.jsx"
 import { AiOutlinePlus } from "react-icons/ai"
 import AddExperience from "./AddExperience.jsx"
-import { Image } from "react-bootstrap"
+import { Image,Dropdown,DropdownButton } from "react-bootstrap"
 import { GoPencil } from "react-icons/go"
 import {CgExport} from  "react-icons/cg"
 import { me } from "../fetch"
@@ -146,15 +146,18 @@ class Body extends React.Component {
 					<div className="d-flex content">
 						<h4 className="mb-3 d-inline ">{this.props.title}</h4>
 						{this.props.id === "me" && (
+
+							
 							<div className= "d-flex ml-auto">
-							<div onClick={this.getCSV}>
-							<CgExport className="icons0 "/>
-					<CSVLink data={this.state.csv}>Download me</CSVLink>
-					</div>
-							<AiOutlinePlus
+								 
+								<DropdownButton variant="Secondary"
+								title="More..."
+								onClick={this.getCSV}>
+								<Dropdown.Item as="button" ><CSVLink data={this.state.csv}>Download your experience as CSV</CSVLink></Dropdown.Item>
+								</DropdownButton>
+									<AiOutlinePlus
 								className="icons0 ml-auto"
-								onClick={this.handleShow}
-							/>
+								onClick={this.handleShow}/>
 							</div>
 							
 							
