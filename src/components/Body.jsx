@@ -4,7 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai"
 import AddExperience from "./AddExperience.jsx"
 import { Image } from "react-bootstrap"
 import { GoPencil } from "react-icons/go"
-
+import {CgExport} from  "react-icons/cg"
 import { me } from "../fetch"
 
 //HERE IS PROFILE BODY
@@ -23,24 +23,33 @@ class Body extends React.Component {
 
 	//THis fetch for showing experiences based on id/Id is coming from clicking
 	fetch = async () => {
-		let TOKEN = process.env.REACT_APP_TOKEN
-		console.log("this.state.id", this.state.id)
-		//old url ${process.env.REACT_APP_URL}profile/5fc4c459ed266800170ea3d7/experiences
-		const url = `${process.env.REACT_APP_URL}profile/${
-			this.props.id === "me" ? this.state.id : this.props.id
-		}/experience`
-		let response = await fetch(url, {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${TOKEN}`,
-			},
-		})
-		if (response.ok) {
-			let experiences = await response.json()
-			console.log("experiences:", experiences)
-
-			this.setState({ experiences: experiences })
+		try {
+			let TOKEN = process.env.REACT_APP_TOKEN
+			console.log("this.state.id", this.state.id)
+			//old url ${process.env.REACT_APP_URL}profile/5fc4c459ed266800170ea3d7/experiences
+			const url = `${process.env.REACT_APP_URL}profile/${
+				this.props.id === "me" ? this.state.id : this.props.id
+			}/experience`
+			let response = await fetch(url, {
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${TOKEN}`,
+				},
+			})
+			if (response.ok) {
+				let experiences = await response.json()
+				console.log("experiences:", experiences)
+	
+				this.setState({ experiences: experiences })
+			}
+			else {
+				console.log("there is an error")
+			}
+		} catch (error) {
+			console.log(error)
+			
 		}
+	
 	}
 	componentDidMount = () => {
 		this.myId()
@@ -80,6 +89,31 @@ class Body extends React.Component {
 
 		this.fetch()
 	}
+	getCSV=async ()=>{ 
+		try {
+			let TOKEN = process.env.REACT_APP_TOKEN
+	
+		const url = `${process.env.REACT_APP_URL}profile/${
+			this.props.id === "me" ? this.state.id : this.props.id
+		}/ex/csv`
+		let response = await fetch(url, {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${TOKEN}`,
+			},
+		})
+	
+		if (response.ok) {
+		let csv= await response.json}
+		else{ console.log("there is an error")}
+			
+		} catch (error) {
+			console.log(error)
+			
+		}
+		
+
+	}
 
 	render() {
 		console.log("ex id:", this.state.exId)
@@ -98,10 +132,16 @@ class Body extends React.Component {
 					<div className="d-flex content">
 						<h4 className="mb-3 d-inline ">{this.props.title}</h4>
 						{this.props.id === "me" && (
+							<div className= "d-flex ml-auto">
+							<CgExport className="icons0 "
+								onClick={this.getCSV}/>
 							<AiOutlinePlus
 								className="icons0 ml-auto"
 								onClick={this.handleShow}
 							/>
+							</div>
+							
+							
 						)}
 					</div>
 
