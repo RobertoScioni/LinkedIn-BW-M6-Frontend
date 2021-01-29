@@ -12,7 +12,16 @@
 	font-weight: bold;
 	color:#1B1B1B
 }
-
+.dropdown a .MuiAvatar-root{
+	width: 27px !important;
+	height: 27px !important;
+}
+.MuiSvgIcon-root{
+	fill: #0009 !important;
+}
+.MuiBadge-colorPrimary {
+	background-color: #0a66c2 !important;
+}
 .userpic {
 	width: 40px;
 	max-height: 40px;
@@ -67,6 +76,23 @@
 	max-width: 56px;
 
 	margin-right: 10px;
+}
+.postReactions button{
+	background-color: white;
+	border: none;
+	color: grey;
+	font-weight: 600;
+	margin-right: 8px;
+	font-size: 15px;
+}
+.postReactions .accordion :focus{
+	border: none;
+}
+/*.postReactions button:hover{
+	background-color: #EBEBEB;
+}*/
+.imageWrap{
+	padding: 0px!important;
 }
 .modal-content {
 	width: 744px;

@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event"
 import React, { useState } from "react"
-
+import Avatar from '@material-ui/core/Avatar';
 import {
 	FormControl,
 	Card,
@@ -12,6 +12,7 @@ import {
 	Button,
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import Login from "./Login"
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -45,12 +46,8 @@ const ProfileMenu = React.forwardRef(
 					<Card.Body className="p-1">
 						<Container fluid>
 							<Row>
-								<Col className="p-0 m-0">
-									<Image
-										src={user.image}
-										roundedCircle
-										className="mediumProfilePic"
-									/>
+								<Col className="p-0 m-2">
+									<Avatar alt={user.name || user.surname} src={user.image} />
 								</Col>
 								<Col className="pl-1 m-0">
 									<p className="p-0 m-0">{user.name}</p>
@@ -82,7 +79,9 @@ const ProfileMenu = React.forwardRef(
 						<Dropdown.Item>Posts & Activity</Dropdown.Item>
 						<Dropdown.Item>Job Posting Account</Dropdown.Item>
 						<Dropdown.Divider />
+						<a href={Login}>
 						<p className="mb-0">Sign Out</p>
+						</a>
 					</Card.Body>
 				</Card>
 			</div>

@@ -55,7 +55,8 @@ class AddExperience extends React.Component {
 
 		try {
 			if (this.props.exId) {
-				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
+				console.log("exId:",this.props.exId)
+				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 				response = await fetch(url + this.props.exId, {
 					method: "PUT",
 					body: JSON.stringify(this.state.experience),
@@ -67,7 +68,7 @@ class AddExperience extends React.Component {
 				})
 			} else {
 				response = await fetch(
-					`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences`,
+					`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience`,
 					{
 						method: "POST",
 						body: JSON.stringify(this.state.experience),
@@ -118,8 +119,8 @@ class AddExperience extends React.Component {
 		let TOKEN = process.env.REACT_APP_TOKEN
 
 		try {
-			//${process.env.REACT_APP_URL}profile//experiences
-			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
+			//${process.env.REACT_APP_URL}profile//experience
+			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 			let response = await fetch(url + this.props.exId, {
 				method: "GET",
 				headers: {
@@ -150,7 +151,7 @@ class AddExperience extends React.Component {
 		let TOKEN = process.env.REACT_APP_TOKEN
 		this.setState({ loading: true })
 		try {
-			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
+			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 			let response = await fetch(url + this.props.exId, {
 				method: "DELETE",
 				headers: {
@@ -174,7 +175,7 @@ class AddExperience extends React.Component {
 	handleImageUpload = (event) => {
 		console.log("target", event.target)
 		const formData = new FormData()
-		formData.append("experience", event.target.files[0])
+		formData.append("image", event.target.files[0])
 		this.setState({ formData })
 	}
 
@@ -183,11 +184,11 @@ class AddExperience extends React.Component {
 		console.log("token", TOKEN)
 		console.log(
 			"url",
-			`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/`
+			`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 		)
 		try {
 			let response = await fetch(
-				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experiences/` +
+				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/` +
 					id +
 					"/picture",
 				{

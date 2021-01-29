@@ -248,7 +248,7 @@ class NewsFeedBody extends React.Component {
 						)}
 					</Pagination>
 				</Container>
-				<Container>
+				<Container style={{padding:"0px"}}>
 					{this.state.posts &&
 						Array.from(this.state.posts).map((post) => (
 							<NewsFeedPost

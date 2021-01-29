@@ -7,8 +7,8 @@ class GenericSidebar extends React.Component {
 		return (
 			<>
 			 <div  className="cardsin pt-3 px-3 pb-0 ">
-			 	<h4 className="mb-3"><FaLinkedin/> Learning </h4>
-                <h4 className="mb-3">Add new skills with these courses</h4>
+			 	<h5 className="mb-3"><FaLinkedin/> Learning </h5>
+                <strong><p className="mb-3">Add new skills with these courses</p></strong>
 						<div className="d-flex  content  ">
 									<Image  src="https://miro.medium.com/max/1400/1*tmD_elC_QhRU0Cag2cKoKA.jpeg" className="Img" />
 									<div>

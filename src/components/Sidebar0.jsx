@@ -9,11 +9,11 @@ class Sidebar0 extends React.Component {
 			<>
 				<div className="cardsin pt-3 px-3 pb-0 mt-0">
 					<div className="d-flex content ">
-						<h6 className="d-inline"> Edit Public Profile & URL</h6>
+					<strong><p className="d-inline"> Edit Public Profile & URL</p></strong>
 						<BsQuestionCircleFill className="icons0 ml-auto" />
 					</div>
 					<div className="d-flex content ">
-						<h6 className="mb-0">Add Profile in Another Language </h6>
+						<strong><p className="mb-0 ">Add Profile in Another Language </p></strong>
 						<BsQuestionCircleFill className="icons0 ml-auto" />
 					</div>
 				</div>
