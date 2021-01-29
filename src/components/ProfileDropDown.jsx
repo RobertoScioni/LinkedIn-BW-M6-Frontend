@@ -12,6 +12,7 @@ import {
 	Button,
 } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import Login from "./Login"
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -78,7 +79,9 @@ const ProfileMenu = React.forwardRef(
 						<Dropdown.Item>Posts & Activity</Dropdown.Item>
 						<Dropdown.Item>Job Posting Account</Dropdown.Item>
 						<Dropdown.Divider />
+						<a href={Login}>
 						<p className="mb-0">Sign Out</p>
+						</a>
 					</Card.Body>
 				</Card>
 			</div>
