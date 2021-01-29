@@ -182,15 +182,13 @@ class AddExperience extends React.Component {
 	UploadImageFetch = async (id) => {
 		let TOKEN = process.env.REACT_APP_TOKEN
 		console.log("token", TOKEN)
-		console.log(
+		console.log("image url:",
 			"url",
 			`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
 		)
 		try {
 			let response = await fetch(
-				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/` +
-					id +
-					"/picture",
+				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`+id+"/picture",
 				{
 					method: "POST",
 					body: this.state.formData,
