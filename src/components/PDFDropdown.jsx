@@ -16,6 +16,7 @@ export default class PDFDropdown extends Component {
             req.onload = function() {
                 let file = new Blob([req.response],{ type: 'application/pdf' })
                 let fileURL = URL.createObjectURL(file);
+                console.log(fileURL)
                 window.open(fileURL, "_blank");
             }
             req.send();

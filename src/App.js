@@ -7,8 +7,10 @@ import "./css/Evgeni.css"
 import "./App.css"
 import Profile from "./components/Profile.jsx"
 import OurNavBar from "./components/OurNavBar"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import NewsPage from "./components/NewsPage"
+import Login from "./components/Login"
+
 
 class App extends React.Component {
 	render() {

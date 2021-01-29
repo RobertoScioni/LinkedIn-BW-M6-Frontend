@@ -77,6 +77,23 @@
 
 	margin-right: 10px;
 }
+.postReactions button{
+	background-color: white;
+	border: none;
+	color: grey;
+	font-weight: 600;
+	margin-right: 8px;
+	font-size: 15px;
+}
+.postReactions .accordion :focus{
+	border: none;
+}
+/*.postReactions button:hover{
+	background-color: #EBEBEB;
+}*/
+.imageWrap{
+	padding: 0px!important;
+}
 .modal-content {
 	width: 744px;
 	overflow-y: auto !important;
