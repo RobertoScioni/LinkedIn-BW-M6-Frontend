@@ -218,7 +218,8 @@ class AddExperience extends React.Component {
 	postExp = async () => {
 		let expId = await this.EditFetch()
 		console.log("expId", expId)
-		this.UploadImageFetch(expId._id)
+		
+		 this.UploadImageFetch(expId._id)
 	}
 
 	componentDidMount = async () => {
