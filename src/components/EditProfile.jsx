@@ -204,6 +204,10 @@ class EditProfile extends React.Component {
 									placeholder="Ex: johnDoe@gmail.com"
 									readOnly
 								/>
+                                <Form.Label htmlFor="email">
+									
+                                    You can your change your  e-mail adress in Account Settings.
+								</Form.Label>
 							</Form.Group>
 
 							<Form.Group>
@@ -244,7 +248,7 @@ class EditProfile extends React.Component {
 								/>
 							</Form.Group>
                             <Form.Group>
-								<Form.Label>E-mail</Form.Label>
+								<Form.Label>User Name</Form.Label>
 
 								<Form.Control
 									id="username"
@@ -253,6 +257,9 @@ class EditProfile extends React.Component {
 									readOnly
 								/>
 							</Form.Group>
+                            <Form.Label htmlFor="username">
+									Username is unique and the same as your e-mail. You should go to Account Settings.
+								</Form.Label>
 							<Form.Group className="d-flex px-3">
 								
 								<Button
