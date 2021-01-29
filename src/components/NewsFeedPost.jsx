@@ -144,7 +144,7 @@ class NewsFeedPost extends React.Component {
                 <Accordion.Collapse eventKey="0">
 				  <PostComment 
 				  image={this.state.user.image}
-				  postId={this.state._id}
+				  postId={this.props.post._id}
 				  user={this.state.user.name,this.state.user.surname}/>
                 </Accordion.Collapse>
               </Accordion>

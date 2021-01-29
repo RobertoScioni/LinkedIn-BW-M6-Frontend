@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
-import {FormControl,InputGroup,Button, ListGroup} from "react-bootstrap"
+import {FormControl,InputGroup,Button, Row, Col,ListGroup} from "react-bootstrap"
 import {Avatar} from '@material-ui/core';
+import { me } from "../fetch"
 
 export default class PostComment extends Component {
     state={
         comments: [],
-        newComment: { name: " ", comment: " " },
+        newComment: { 
+            name: {}, 
+            comment: " " },
+        currentUser:[]
+    }
+    fetchMe = async () => {
+        let response = await me()
+        this.setState({newComment:{
+            ...this.state.newComment,
+            name: response
+        },currentUser:response})
     }
     changeHandler = (e) => {
         this.setState({
@@ -17,8 +28,9 @@ export default class PostComment extends Component {
       };
     fetchComments = async (postId) => {
         try {
+            console.log("FETCHING")
             let response = await fetch(
-              "http://localhost:3008/cmnt/" + postId + "/comments",
+              "http://localhost:3008/cmnt/" + postId,
               {
                 method: "GET",
               }
@@ -26,8 +38,9 @@ export default class PostComment extends Component {
             console.log(response);
             if (response.ok) {
               const data = await response.json();
+              console.log(data)
               this.setState({ comments: data });
-             await this.fetchComments()
+             //await this.fetchComments()
               console.log(this.state.comments, "fetched Comments");
             }
           } catch (error) {
@@ -35,24 +48,42 @@ export default class PostComment extends Component {
           }
     }
     postComment = async () => {
-        let postId = this.props.postId
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(this.state.newComment)
-        };
-        const response = await fetch('http://localhost:3008/cmnt/'+ postId +'/comments', requestOptions);
-        await response.json();
-        this.setState({ newComment:{ name:"",comment:""} });
+        try {
+            let postId = this.props.postId
+            let response = await fetch("http://localhost:3008/cmnt/" + postId,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(this.state.newComment),
+              });
+              console.log(response)
+            if (response.ok) {
+                await response.json()
+                this.fetchComments(postId)
+                this.setState({newComment: {name:"",comment:""}})
+            } else {
+                console.log("something went wrong")
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
     componentDidMount(){
+        this.fetchMe()
         this.fetchComments(this.props.postId)
-    }
+        console.log("component MOUNTED")
+      console.log(this.props.postId)
+  }
     render() {
+        const { currentUser } = this.state;
+        console.log(this.state.currentUser,"ITS MEEEEEEE")
+        console.log(this.state.newComment.name, "CURRENTUSERRRRRRRRRRRRRRRR")
+        console.log(this.state.comments, "FDSFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
+       // console.log(this.props.post, "FUCKING POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
         return (
             <div>
                 <InputGroup className="mt-2">
-                <Avatar alt={this.props.user} src={this.props.image} className="mr-1"/>
+                <Avatar alt={this.props.user} src={this.state.currentUser.image} className="mr-1"/>
                     <FormControl
                     onChange={(e) => this.changeHandler(e)}
                     id={"comment"}
@@ -63,12 +94,24 @@ export default class PostComment extends Component {
                       aria-describedby="basic-addon2"
                     />
                     <InputGroup.Append>
-                      <Button variant="outline-secondary" style={{border:"solid #0A66C2 1px" ,backgroundColor:"#0A66C2",color:"white",height:"38px"}}>Post</Button>
+                      <Button variant="outline-secondary" onClick={this.postComment} style={{border:"solid #0A66C2 1px" ,backgroundColor:"#0A66C2",color:"white",height:"38px"}}>Post</Button>
                     </InputGroup.Append>
                   </InputGroup>
-                  <ListGroup>
-                        <ListGroup.Item>{this.state.comments.comment}</ListGroup.Item>
-                    </ListGroup>
+                  <ListGroup className="mt-2">
+                  {
+                      this.state.comments.reverse().map(comment => 
+                        <ListGroup.Item style={{border:"none"}}>
+                            <Row>
+                                <Col lg={1}>
+                                <Avatar alt={comment.name.name, comment.name.surname} src={comment.name.image}/></Col>
+                                <Col style={{marginLeft:"30px",display:"grid", borderRadius:"4px",height:"60px",backgroundColor:"#F2F2F2"}}><strong>{comment.name.name} {comment.name.surname}</strong>
+                                {comment.comment}
+                                </Col>
+                            </Row>
+                            </ListGroup.Item>
+                      )
+                  }
+                </ListGroup> 
             </div>
         )
     }

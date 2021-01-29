@@ -85,6 +85,12 @@
 	margin-right: 8px;
 	font-size: 15px;
 }
+.accordion :focus{
+	border:none !important;
+}
+.postReactions button :focus{
+	border:none !important;
+}
 .postReactions .accordion :focus{
 	border: none;
 }
