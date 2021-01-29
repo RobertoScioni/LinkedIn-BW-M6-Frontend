@@ -3,12 +3,14 @@ import "../css/Evgeni.css";
 import { GoPencil } from "react-icons/go";
 import { Col, Row, Container, Dropdown, Image } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
+import EditProfile from "./EditProfile.jsx"
 import { addProfilePic } from "../fetch";
 import PDFDropdown from "./PDFDropdown"
 //var tries = 1 NO pl NO
 class MyJumbotron extends React.Component {
   state = {
     myObject: {},
+    showPF:false
   };
   fetchMe = async (id) => {
     try {
@@ -76,9 +78,27 @@ class MyJumbotron extends React.Component {
     let image = document.querySelector(".inputImage");
     console.log(image);
   };
+
+  
+  handleShowPF = () => this.setState({ showPF: true})
+handleClosePF = (showModePF) => {
+  this.setState({ showPF: showModePF })
+
+  // this.myId()
+
+  this.fetchMe()
+}
   render() {
     return (
       <>
+      {this.state.showPF && (
+					<EditProfile
+						showPF={this.state.showPF}
+						handleClosePF={this.handleClosePF}
+						uid={this.state.myObject._id}
+					/>
+				)}
+
         <Container className="notJumbotronContainer ">
           <div>
             <Row>
@@ -156,9 +176,9 @@ class MyJumbotron extends React.Component {
 				<PDFDropdown
 				id={this.state.myObject._id} />
               </Col>
-              <Col sm={1} xl={1} className="d-flex">
+              <Col sm={1} xl={1} className="d-flex ">
                 {this.props.id === "me" && (
-                  <GoPencil className="icons0 pencil ml-auto " />
+                  <GoPencil  onClick={this.handleShowPF} className="icons0 pencil  " />
                 )}
               </Col>
             </Row>
@@ -211,7 +231,7 @@ class MyJumbotron extends React.Component {
         <div className=" pt-3 px-3 pb-0 cardsin content">
           <div className=" d-flex ">
             <h4 className="mb-3 d-inline ">About</h4>
-            {this.props.id === "me" && <GoPencil className="icons0 ml-auto" />}
+            {this.props.id === "me" && <GoPencil onClick={this.handleShowPF}  className="icons0 ml-auto" />}
           </div>
           <div className="d-flex  bio mt-3 mb-3  ">
             {/* {this.state && new String(this.state.myObject.bio).substring(0, 200)+ " ...  see more"} */}

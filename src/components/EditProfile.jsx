@@ -3,48 +3,43 @@ import React from "react"
 import { Modal, Button, Form, Col, Image, Spinner } from "react-bootstrap"
 import { me } from "../fetch"
 
-class AddExperience extends React.Component {
+class EditProfile extends React.Component {
 	state = {
-		experience: {
+		profile: {
 			
-                name:"Hilal",
-                surname:"Semercioğlu",
-                email:"hillcakmak@gmail.com",
-                bio:"Alien",
-                title"Student",
-                "area":"anywhere",
-                "image":""
-           
-		},
+                name:"",
+                surname:"",
+                bio:"",
+                title:"",
+                area:"",
+                
+        },
+        readOnly:{
+            email:"",
+            username:"",
+
+        },
 		formData: null,
 
-		exp: {},
+		profile: {},
 		errMessage: "",
 		loading: false,
-	}
+    }
+   
 	// myId = async () => {
 	// 	let id = await me()
 	// 	id = id._id
 	// 	this.setState({ id })
 	// }
 	//It passes false as showMode to parent body. It means dont show Modal.
-	handleClose = () => this.props.handleClose(false)
+	handleClosePF = () => this.props.handleClosePF(false)
 
 	updateField = (e) => {
-		let experience = { ...this.state.experience }
-		let currentid = e.currentTarget.id
+        let currentid = e.currentTarget.id
+		let profile= { ...this.state.profile}
+		profile[currentid] = e.currentTarget.value 
 
-		if (currentid === "currentlyWork") {
-			experience[currentid] = e.currentTarget.checked
-		} else if (currentid === "updateIndustry") {
-			experience[currentid] = e.currentTarget.checked
-		} else if (currentid === "updateHeadline") {
-			experience[currentid] = e.currentTarget.checked
-		} else {
-			experience[currentid] = e.currentTarget.value // e.currentTarget.value is the keystroke
-		}
-
-		this.setState({ experience: experience })
+		this.setState({ profile:profile })
 	}
 
 	EditFetch = async () => {
@@ -52,49 +47,36 @@ class AddExperience extends React.Component {
 		let response
 
 		try {
-			if (this.props.exId) {
-				console.log("exId:",this.props.exId)
-				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
-				response = await fetch(url + this.props.exId, {
+			
+				const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}`
+				response = await fetch(url, {
 					method: "PUT",
-					body: JSON.stringify(this.state.experience),
+					body: JSON.stringify(this.state.profile),
 					headers: new Headers({
 						"Content-Type": "application/json",
 
 						Authorization: `Bearer ${TOKEN}`,
 					}),
 				})
-			} else {
-				response = await fetch(
-					`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience`,
-					{
-						method: "POST",
-						body: JSON.stringify(this.state.experience),
-						headers: new Headers({
-							"Content-Type": "application/json",
-
-							Authorization: `Bearer ${TOKEN}`,
-						}),
-					}
-				)
-			}
+			
 			console.log("RESPONSE", response)
 			if (response.ok) {
 				let res = await response.json()
-				console.log("res of post", res)
+				console.log("res of edit ", res)
 
 				this.setState({
-					experience: {
-						role: "",
-						company: "",
-						area: "",
-						startDate: "",
-						endDate: "",
-						description: "",
-					},
+					profile: {
+			
+                        name:"",
+                        surname:"",
+                        bio:"",
+                        title:"",
+                        area:"",
+                   
+                },
 					errMessage: "",
 				})
-				//this.handleClose()
+				this.handleClosePF()
 				return res
 			} else {
 				console.log("an error occurred")
@@ -117,27 +99,36 @@ class AddExperience extends React.Component {
 		let TOKEN = process.env.REACT_APP_TOKEN
 
 		try {
-			//${process.env.REACT_APP_URL}profile//experience
-			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
-			let response = await fetch(url + this.props.exId, {
+			//${process.env.REACT_APP_URL}profile//profile
+			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}`
+			let response = await fetch(url , {
 				method: "GET",
 				headers: {
 					Authorization: `Bearer ${TOKEN}`,
 				},
 			})
 			if (response.ok) {
-				let exp = await response.json()
-				console.log("exp:", exp)
+				let profile = await response.json()
+				console.log("profile:", profile)
 
 				this.setState({
-					experience: {
-						role: exp.role,
-						company: exp.company,
-						area: exp.area,
-						startDate: exp.startDate,
-						endDate: exp.endDate,
-						description: exp.description,
-					},
+                    profile: {
+			
+                        name:profile.name,
+                        surname:profile.surname,
+                        bio:profile.bio,
+                        title:profile.title,
+                        area:profile.area,
+                        
+                },
+                 readOnly:{
+                     username:profile.username,
+                     email:profile.email
+
+                 },
+
+					errMessage: "",
+					
 				})
 			}
 		} catch (e) {
@@ -145,163 +136,84 @@ class AddExperience extends React.Component {
 		}
 	}
 
-	handleDelete = async () => {
-		let TOKEN = process.env.REACT_APP_TOKEN
-		this.setState({ loading: true })
-		try {
-			const url = `${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
-			let response = await fetch(url + this.props.exId, {
-				method: "DELETE",
-				headers: {
-					Authorization: `Bearer ${TOKEN}`,
-				},
-			})
-			if (response.ok) {
-				alert("exp deleted succesfully")
-				this.setState({ loading: false })
-				this.handleClose()
-			} else {
-				alert("Something went wrong!")
-				this.setState({ loading: false })
-			}
-		} catch (e) {
-			console.log(e)
-			this.setState({ loading: false })
-		}
-	}
-
-	handleImageUpload = (event) => {
-		console.log("target", event.target)
-		const formData = new FormData()
-		formData.append("image", event.target.files[0])
-		this.setState({ formData })
-	}
-
-	UploadImageFetch = async (id) => {
-		let TOKEN = process.env.REACT_APP_TOKEN
-		console.log("token", TOKEN)
-		console.log(
-			"url",
-			`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/`
-		)
-		try {
-			let response = await fetch(
-				`${process.env.REACT_APP_URL}profile/${this.props.uid}/experience/` +
-					id +
-					"/picture",
-				{
-					method: "POST",
-					body: this.state.formData,
-					headers: new Headers({
-						// "Content-Type": "application/json",
-						Authorization: `Bearer ${TOKEN}`,
-					}),
-				}
-			)
-
-			if (response.ok) {
-				let result = response.json()
-				alert("Experience saved!")
-				this.setState({ loading: false })
-				console.log(result)
-				this.handleClose()
-			}
-		} catch (e) {
-			console.log(e)
-		}
-	}
+	
+	
 	submitForm = (e) => {
 		e.preventDefault()
 		this.setState({ loading: true })
-		this.postExp()
+	this.EditFetch()
 	}
-	postExp = async () => {
-		let expId = await this.EditFetch()
-		console.log("expId", expId)
-		this.UploadImageFetch(expId._id)
-	}
+
 
 	componentDidMount = async () => {
-		console.log(this.props.exId)
-		//this.myId()
-
-		if (this.props.exId) {
+	
 			this.getFetch()
-		}
+	
 	}
 
 	render() {
-		const { show } = this.props
+		const { showPF } = this.props
 		return (
 			<>
-				<Modal show={show} onHide={this.handleClose}>
+				<Modal show={showPF} onHide={this.handleClosePF}>
 					<Modal.Header closeButton>
 						<Modal.Title>
-							{this.props.exId ? (
-								<p>Edit/Delete Experience</p>
-							) : (
-								<p>Add New Experience</p>
-							)}
+							
+								<p>Edit Profile</p>
+						
+							
 						</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<Form onSubmit={this.submitForm}>
+                        <Form.Row>
+								<Form.Group as={Col}>
+									<Form.Label htmlFor="name">Name *</Form.Label>
+									<Form.Control
+										type="text"
+										name="name"
+										id="name"
+										placeholder="name"
+										value={this.state.profile.name}
+										onChange={this.updateField}
+										required
+									></Form.Control>
+								</Form.Group>
+								<Form.Group as={Col}>
+									<Form.Label htmlFor="surname">Surname*</Form.Label>
+									
+										<Form.Control
+											type="text"
+											name="surname"
+											id="surname"
+											placeholder=" surname"
+											value={this.state.profile.surname}
+											onChange={this.updateField}
+											required
+										></Form.Control>
+									
+								</Form.Group>
+							</Form.Row>
 							<Form.Group>
-								<Form.Label>Title*</Form.Label>
+								<Form.Label>E-mail</Form.Label>
 
 								<Form.Control
-									id="role"
+									id="email"
 									type="text"
-									value={this.state.experience.role}
-									onChange={this.updateField}
-									placeholder="Ex: Retail Sales Manager"
-									required
+									value={this.state.readOnly.email}
+									placeholder="Ex: johnDoe@gmail.com"
+									readOnly
 								/>
 							</Form.Group>
 
 							<Form.Group>
-								<Form.Label htmlFor="employmentType">
-									Employment Type
-								</Form.Label>
+								<Form.Label>Title</Form.Label>
 								<Form.Control
-									as="select"
-									name="employmentType"
-									id="employmentType"
-									value={this.state.experience.employmentType}
-									onChange={this.updateField}
-								>
-									<option>Full-time</option>
-									<option>Part-time</option>
-									<option>Self- Employed</option>
-									<option>Freelance</option>
-									<option>Contract</option>
-									<option>Internship</option>
-									<option>Seasonal</option>
-									<option>Apprenticeship</option>
-								</Form.Control>
-								<Form.Label htmlFor="employmentType">
-									Country Spesific Employment Types
-								</Form.Label>
-							</Form.Group>
-
-							<Form.Group>
-								<Form.Label>Change the Image</Form.Label>
-								<Form.Control
-									id="fileUpload"
-									type="file"
-									onChange={this.handleImageUpload}
-									required
-								/>
-							</Form.Group>
-
-							<Form.Group>
-								<Form.Label>Company *</Form.Label>
-								<Form.Control
-									id="company"
+									id="title"
 									type="text"
-									value={this.state.experience.company}
+									value={this.state.profile.title}
 									onChange={this.updateField}
-									placeholder="Ex: Strive School"
+									placeholder="Ex: CFO"
 									required
 								/>
 							</Form.Group>
@@ -310,104 +222,39 @@ class AddExperience extends React.Component {
 								<Form.Control
 									id="area"
 									type="text"
-									value={this.state.experience.area}
+									value={this.state.profile.area}
 									onChange={this.updateField}
 									placeholder="Ex: İstanbul /Turkey"
-									required
+								
 								/>
 							</Form.Group>
 
+						
+					
 							<Form.Group>
-								<Form.Label>
-									<Form.Check
-										type="checkbox"
-										id="currentlyWork"
-										label="I am currently working in this role"
-										checked={this.state.experience.currentlyWork}
-										onChange={this.updateField}
-									/>
-								</Form.Label>
-							</Form.Group>
-							<Form.Row>
-								<Form.Group as={Col}>
-									<Form.Label htmlFor="date">Start Date</Form.Label>
-									<Form.Control
-										type="date"
-										name="startDate"
-										id="startDate"
-										placeholder="start date"
-										value={this.state.experience.startDate}
-										onChange={this.updateField}
-										required
-									></Form.Control>
-								</Form.Group>
-								<Form.Group as={Col}>
-									<Form.Label htmlFor="date">End Date</Form.Label>
-									{this.state.experience.currentlyWork && <p>present</p>}
-
-									{!this.state.experience.currentlyWork && (
-										<Form.Control
-											type="date"
-											name="endDate"
-											id="endDate"
-											placeholder="end date"
-											value={this.state.experience.endDate}
-											onChange={this.updateField}
-											required
-										></Form.Control>
-									)}
-								</Form.Group>
-							</Form.Row>
-
-							<Form.Group>
-								<Form.Label>
-									<Form.Check
-										type="checkbox"
-										id="updateIndustry"
-										label="Update my industry"
-										checked={this.state.experience.updateIndustry}
-										onChange={this.updateField}
-									/>
-								</Form.Label>
-							</Form.Group>
-
-							<Form.Group>
-								<Form.Label>
-									<Form.Check
-										type="checkbox"
-										id="updateHeadline"
-										label="Update my headline"
-										checked={this.state.experience.updateHeadline}
-										onChange={this.updateField}
-									/>
-								</Form.Label>
-							</Form.Group>
-
-							<Form.Group>
-								<Form.Label htmlFor="description">Description</Form.Label>
+								<Form.Label htmlFor="bio">BIO</Form.Label>
 								<Form.Control
 									as="textarea"
-									name="description"
-									id="description"
-									placeholder="description"
-									value={this.state.experience.description}
+									name="bio"
+									id="bio"
+									placeholder="bio"
+									value={this.state.profile.bio}
 									onChange={this.updateField}
-									required
+								
+								/>
+							</Form.Group>
+                            <Form.Group>
+								<Form.Label>E-mail</Form.Label>
+
+								<Form.Control
+									id="username"
+									type="text"
+									value={this.state.readOnly.username}
+									readOnly
 								/>
 							</Form.Group>
 							<Form.Group className="d-flex px-3">
-								{this.props.exId && (
-									<Button
-										className=" deleteBtn"
-										variant="primary"
-										onClick={this.handleDelete}
-									>
-										{this.state.loading && (
-											<Spinner animation="border" variant="warning" />
-										)}
-										Delete
-									</Button>
-								)}
+								
 								<Button
 									className="saveBtn ml-auto"
 									variant="primary"
@@ -427,4 +274,4 @@ class AddExperience extends React.Component {
 		)
 	}
 }
-export default AddExperience
+export default EditProfile
