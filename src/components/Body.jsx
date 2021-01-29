@@ -2,6 +2,7 @@ import React from "react"
 import Experience from "./Experience.jsx"
 import { AiOutlinePlus } from "react-icons/ai"
 import AddExperience from "./AddExperience.jsx"
+
 import { Image,Dropdown,DropdownButton } from "react-bootstrap"
 import { GoPencil } from "react-icons/go"
 import {CgExport} from  "react-icons/cg"
@@ -20,7 +21,8 @@ class Body extends React.Component {
 
 		id: false,
 		isEditable: false,
-		csv:""
+		csv:"",
+		
 	}
 
 
@@ -92,6 +94,8 @@ class Body extends React.Component {
 
 		this.fetch()
 	}
+
+	
 	getCSV=async ()=>{ 
 		try {
 		let TOKEN = process.env.REACT_APP_TOKEN
@@ -139,6 +143,7 @@ class Body extends React.Component {
 					/>
 				)}
 
+				
 				<div className="cardsin pt-3 px-3 pb-0 ">
 					<div className="d-flex content">
 						<h4 className="mb-3 d-inline ">{this.props.title}</h4>
