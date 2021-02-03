@@ -76,10 +76,9 @@ export default class PostComment extends Component {
   }
     render() {
         const { currentUser } = this.state;
-        console.log(this.state.currentUser,"ITS MEEEEEEE")
-        console.log(this.state.newComment.name, "CURRENTUSERRRRRRRRRRRRRRRR")
-        console.log(this.state.comments, "FDSFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
-       // console.log(this.props.post, "FUCKING POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+        console.log(this.state.currentUser,"current user")
+        console.log(this.state.newComment.name, "current user")
+        console.log(this.state.comments, "comments")
         return (
             <div>
                 <InputGroup className="mt-2">
