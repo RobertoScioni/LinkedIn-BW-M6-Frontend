@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { ListGroup} from "react-bootstrap"
 import io from "socket.io-client";
-import { Modal, InputGroup, FormControl, Button } from "react-bootstrap";
+
 
 
 
@@ -12,19 +12,21 @@ const connOpt = {
   let socket = io("https://striveschool.herokuapp.com/", connOpt); //socket instance
 
 function Chat() {
-    const [username, setUsername] = useState("user1");
+    const [username, setUsername] = useState("hilal");
     const [list, setList] = useState([]);
-    const [receiver, setReceiver] = useState("");//socketId
+    const [receiver, setReceiver] = useState("");
+
     const [text, setText] = useState("");
+    const [allMyMessages, setallMyMessages] = useState("");
     
 
     useEffect(() => {
-        socket.on("bmsg", (msg) => setText((text) => text.concat(msg)));
-        //listening to any event of type "bmsg" and reacting by calling the function
-        //that will append a new message to the "messages" array
-    
+        socket.on("chatmessage", (msg) => setText((text) => text.concat(msg)));
         socket.on("connect", () => console.log("connected to socket")); //check if socket is connected
-       
+        socket.on("list", (list) => setList(list));
+        socket.emit("setUsername", (username) => setUsername(username));
+        console.log("list",list)
+ 
         return () => socket.removeAllListeners(); //componentWillUnmount
       }, []);
 
@@ -33,42 +35,56 @@ function Chat() {
     //   const getList = useCallback(async () => {
     //   let response= await fetch("https://striveschool-api.herokuapp.com")
     //   let list = await response.json()
+    //   setList(list)
     //   console.log("list",list)
     //   }, []);
 
 
 
-      useEffect(
-          (
-          async ()=>{
-          let response= await fetch("https://striveschool-api.herokuapp.com")
-           let list = await response.json()
-           console.log("list",list)
-           } ) (), []);
+    //   useEffect(getList, [getList]);
+
+      const getPastMessages = async () => {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/messages/" + username
+        );
+        let messages = await response.json();
+        console.log(messages);
+         setallMyMessages((msg) => msg.concat(messages));
+      };
 
       const sendMessage = (e) => {
         e.preventDefault();
     
         if (text!== "") {
            
-          socket.emit("bmsg", {
-            //emitting an event with a payload to send the message to all connected users
+          socket.emit("chatmessage", {
+            //emitting an event with a payload to send the message to a specific user
             from: username, //state.username
-            text: text, //state.message
+            text: text, //state.text
             to:receiver
+            
           });
-    
+
           setText(""); //resets the message text
         }
       };
 
 return (
     <>
-     
+     {/* <ListGroup >
+										{list &&
+											list.map((user) => {
+												return (
+													<ListGroup.Item className="d-flex  content">
+													{user}
+													</ListGroup.Item>
+												)
+											})}
+									</ListGroup> */}
     </>
   );
 }
-{/* <Form inline className="" onSubmit={this.doSearch}>
+{/* <Form inline className="" onSubmit={}>
 								<div>
 									<FormControl
 										
