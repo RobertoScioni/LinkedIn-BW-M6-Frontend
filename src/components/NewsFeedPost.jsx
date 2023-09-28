@@ -7,7 +7,7 @@ import {
   Row,
   Accordion,
 } from "react-bootstrap";
-import { GoPencil, GoTrashcan } from "react-icons/go";
+import { GoPencil, GoTrash } from "react-icons/go";
 import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import SmsOutlinedIcon from "@material-ui/icons/SmsOutlined";
 import KeyboardReturnRoundedIcon from "@material-ui/icons/KeyboardReturnRounded";
@@ -111,7 +111,7 @@ class NewsFeedPost extends React.Component {
                     })
                   }
                 />
-                <GoTrashcan
+                <GoTrash
                   className="icons"
                   onClick={() => this.deleteMe(this.state._id)}
                 />
