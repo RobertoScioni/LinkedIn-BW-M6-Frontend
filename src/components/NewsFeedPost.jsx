@@ -145,7 +145,7 @@ class NewsFeedPost extends React.Component {
 				  <PostComment 
 				  image={this.state.user.image}
 				  postId={this.props.post._id}
-				  user={this.state.user.name,this.state.user.surname}/>
+				  user={this.state.user.name && this.state.user.surname}/>
                 </Accordion.Collapse>
               </Accordion>
             </Card.Body>

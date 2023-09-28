@@ -96,7 +96,7 @@ class LeftSideBarNewsPage extends React.Component {
 				<Container className="secondContainer ">
 				<Row className="events">
 						<Col sm={8} xs={6}>
-							<a href="/" className="hashTagText" className="text-muted font12">
+							<a href="/" className="text-muted font12 hashTagText">
 								Groups
 							</a>
 						</Col>
@@ -113,7 +113,7 @@ class LeftSideBarNewsPage extends React.Component {
 					</Row>
 					<Row className="hashTag">
 						<Col sm={8} xs={6}>
-							<a href="/" className="hashTagText " className="text-muted font12">
+							<a href="/"  className="text-muted hashTagText font12">
 								Followed Hashtag
 							</a>
 						</Col>

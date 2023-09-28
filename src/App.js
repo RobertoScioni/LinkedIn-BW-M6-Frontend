@@ -6,7 +6,7 @@ import "./css/Hilal.css"
 import "./css/Evgeni.css"
 import "./App.css"
 import Profile from "./components/Profile.jsx"
-import Chat from "./components/Chat.jsx"
+// import Chat from "./components/Chat.jsx"
 import OurNavBar from "./components/OurNavBar"
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 import NewsPage from "./components/NewsPage"
@@ -26,7 +26,7 @@ class App extends React.Component {
 						exact
 						render={(props) => <Profile {...props} />}
 					/>
-					<Chat/>
+					{/* <Chat/> */}
 				</Router>
 			</>
 		)

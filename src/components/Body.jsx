@@ -145,13 +145,14 @@ class Body extends React.Component {
 
 				
 				<div className="cardsin pt-3 px-3 pb-0 ">
-					<div className="d-flex content">
+					<div className="d-flex 
+					">
 						<h4 className="mb-3 d-inline ">{this.props.title}</h4>
 						{this.props.id === "me" && (
 
 							
 							<div className= "d-flex ml-auto">
-								 
+								 <h1>HELLO</h1>
 								<DropdownButton variant="Secondary"
 								title="More..."
 								onClick={this.getCSV}>
